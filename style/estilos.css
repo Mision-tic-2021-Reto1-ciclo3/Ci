@@ -1,1 +1,11 @@
-
+body {
+  margin: 0px;
+}
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.primerImagen {
+  height: 400px;
+}
