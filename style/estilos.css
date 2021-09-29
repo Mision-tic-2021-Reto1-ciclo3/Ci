@@ -11,6 +11,13 @@ ul {
   width: 1400px;
 }
 
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
 .login-box,
 .register-box {
   width: 360px;
