@@ -12,11 +12,11 @@ ul {
 }
 
 .login-box,
- .register-box {
-   width: 360px;
-   margin: 7% auto;
- }
- @media (max-width: 768px) {
+.register-box {
+  width: 360px;
+  margin: 3% auto;
+}
+@media (max-width: 768px) {
   .login-box,
   .register-box {
     width: 90%;
@@ -29,7 +29,7 @@ ul {
   font-size: 35px;
   text-align: center;
   margin-bottom: 25px;
-  font-weight: 300;
+  font-weight: 25px;
 }
 .login-logo a,
 .register-logo a {
@@ -47,20 +47,20 @@ ul {
   color: #777;
 }
 .login-box-msg,
- .register-box-msg {
-   margin: 0;
-   text-align: center;
-   padding: 0 20px 20px 20px;
- }
-
- .btn-primary {
-  background-color: #3c8dbc;
+.register-box-msg {
+  margin: 0;
   text-align: center;
-  border-color: #367fa9;
+  padding: 0 20px 20px 20px;
+}
+
+.btn-primary {
+  background-color: #088857;
+  text-align: center;
+  border-color: #188d74;
+  border-radius: 20px;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.hover {
   background-color: #367fa9;
 }
-
