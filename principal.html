@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="./style/estilos.css" />
     <link rel="shortcut icon" href="./media/logoEcoTextil.png" type="image/x-icon" />
     <title>Soluciones Web Ecotextil</title>
+	  <script src="https://apis.google.com/js/platform.js" async defer></script>
+	  <meta name="google-signin-client_id" content="860580858571-ompc5ips8jmlagnrmcm2a9j0cjfire43.apps.googleusercontent.com">
 </head>
 <body>
-    <div id="back"> </div>
+  
+  <div id="back"> </div>
 
     <div class="login-box">
     
@@ -50,12 +53,14 @@
           </a>
           <br>
 
+                  
           <div class="row center">
-            <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-flat">Ingresar con Google </button>
-            </div>
+          <div class="g-signin2">
+           <data-onsuccess="onSignIn">
           </div>
-    
+          </div>
+  
+
         </form>
     
       </div>
