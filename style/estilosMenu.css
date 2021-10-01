@@ -18,7 +18,7 @@ body{
 }
 #sidemenu{
     background-color: var(--bgcolor);
-    color:aquamarine;
+    color:rgb(9, 68, 18);
     position: fixed;
     height: 100%;
     left: 0;
@@ -35,6 +35,11 @@ body{
     box-sizing: border-box;
     border-bottom: solid 1px var(--hovercolor);
 }
+#sidemenu #header img{
+    width: 80%;
+    margin: auto;
+    display: block;
+  }
 #sidemenu #header #title{
     box-sizing: border-box;
     overflow: hidden;
@@ -87,7 +92,7 @@ body{
 }
 #sidemenu #menu-items .item .icon,
 #sidemenu #menu-items .item .title{
-    font-size: 14px;
+    font-size: 16px;
     vertical-align: middle;
     overflow: hidden;
     display: inline-block;
