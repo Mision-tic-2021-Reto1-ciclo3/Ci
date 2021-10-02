@@ -15,84 +15,86 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="style/estilos.css">
 
-    <title>Ventas</title>
+    <title>Productos</title>
     <div class="style">
-        <header class="font center ">Administar ventas</header>
+        <header class="font center ">Administrar Productos</header>
+        <br>
         <div class="contentSells">
             <section>
                 <div>
                     <form action="" class="contentForm">
-                        <h1 class="subtitle">Gestión de ventas</h1>
+                        <h1 class="subtitle">Gestión de Productos</h1>
+                        <br>
+                        <div>
+                          <h1 class="subtitle">Listado de productos</h1>
+                          <legend>
+                              Estado del Producto
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                  class="bi bi-bag-fill" viewBox="0 0 16 16">
+                                  <path
+                                      d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
+                              </svg>
+                          <div class="col-xs-4 margen">                              
+                            <button type="button" class="btn btn-primary btn-flat">Buscar</button>
+                            <button type="button" class="btn btn-primary btn-flat">Listar</button>
+                          </div>
+                          </legend>
+                          <table class="table">
+                              <tr class="contentForm">
+                                  <th>Identificador de producto</th>
+                                  <th>Nombre de producto</th>
+                                  <th>Cantidad producto</th>
+                                  <th>Precio Unit producto</th>
+                                  <th>Disponibilidad</th>
+                                  
+                              </tr>
+                          </table>
+                        </div>
                         <fieldset>
+                              
                             <legend>
-                                Registro de ventas
+                                Registro de Productos
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bag" viewBox="0 0 16 16">
                                     <path
                                         d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                                 </svg>
+                            
+                            
                             </legend>
-                            <label for="">Identificador de venta</label>
-                            <input type="text" placeholder="Id venta"><br />
                             <label for="">Identificador de producto</label>
-                            <input type="text" placeholder="Id producto">
+                            <input type="text" placeholder="Id producto"><br/>
+                            <label for="">Nombre de producto</label>
+                            <input type="text" placeholder="Nombre producto"><br />
                             <label for="">Cantidad producto</label>
                             <input type="text" placeholder="Cant producto"><br />
                             <label for="">Precio unitario producto</label>
                             <input type="text" placeholder="Prec Unit"><br />
-                            <label for="">Identificador de cliente</label>
-                            <input type="text" placeholder="Id cliente">
-                            <label for="">Nombre de cliente</label>
-                            <input type="text" placeholder="Nombre cliente"><br />
-                            <label for="">Fecha de venta</label>
-                            <input type="date" placeholder=""><br />
-                            <label for="">Nombre de vendedor</label>
-                            <input type="text" placeholder="Nombre"><br />
-                            <label for="">Valor total venta</label>
-                            <input type="text" placeholder="Valor total"><br />
+                            
+                            
+                            
                         </fieldset>
-                        <div class="margen">
-                            <label for="Estado de venta">Estado de venta</label>
+                        <div>
+                            <label for="Estado de producto">Estado de producto</label>
                             <select name="estado" id="">
-                                <option value="en proceso">En proceso</option>
-                                <option value="cancelado">Cancelado</option>
-                                <option value="etregado">Entregado</option>
+                                <option value="en proceso">Disponible</option>
+                                <option value="cancelado">No Disponible</option>                                
                             </select>
                         </div>
+                        <div class="col-xs-4 margen">                              
+                          <button type="button" class="btn btn-primary btn-flat">Registrar</button><br />
+                        </div>
                         <div class="col-xs-4 margen">
-                            <button type="button" class="btn btn-primary">Actualizar</button>
-                            <button type="button" class="btn btn-primary btn-flat">Buscar</button>
-                            <button type="button" class="btn btn-primary btn-flat">Listar</button>
-                            <button type="button" class="btn btn-primary btn-flat">Quitar</button>
-                            <button type="button" class="btn btn-primary btn-flat">Registrar</button><br />
+                          <button type="button" class="btn btn-primary">Actualizar</button>
+                          
+                          <button type="button" class="btn btn-primary btn-flat">Quitar</button>
+                          <br />
 
                         </div>
+                        
                     </form>
                 </div>
-                <div>
-                    <h1 class="subtitle">Ventas Realizadas</h1>
-                    <legend>
-                        Listado de ventas realizadas
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-bag-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
-                        </svg>
-                    </legend>
-                    <table class="table">
-                        <tr class="contentForm">
-                            <th>Identificador de venta</th>
-                            <th>Identificador de producto</th>
-                            <th>Cantidad producto</th>
-                            <th>Precio Unit producto</th>
-                            <th>Identificador de cliente</th>
-                            <th>Nombre de cliente</th>
-                            <th>Fecha de venta</th>
-                            <th>Nombre de vendedor</th>
-                            <th>Valor total venta</th>
-                        </tr>
-                    </table>
-                </div>
+                
             </section>
 
         </div>
