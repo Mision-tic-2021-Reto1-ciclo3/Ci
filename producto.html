@@ -29,61 +29,90 @@
                           <h1 class="subtitle">Listado de productos</h1>
                           <legend>
                               Estado del Producto
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                  class="bi bi-bag-fill" viewBox="0 0 16 16">
-                                  <path
-                                      d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
-                              </svg>
-                          <div class="col-xs-4 margen">                              
-                            <button type="button" class="btn btn-primary btn-flat">Buscar</button>
-                            <button type="button" class="btn btn-primary btn-flat">Listar</button>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                              <hr />
+                              <div class="col-xs-4 margen">                              
+                            <button type="button" class="btn btn-primary btn-flat">Buscar producto</button>
+                            <button type="button" class="btn btn-primary btn-flat">Listar producto</button>
                           </div>
                           </legend>
-                          <table class="table">
-                              <tr class="contentForm">
+                          
+                          <div id="main-container">
+                            <table class="table">
+                              <thead class="thead">
+                                <tr>
                                   <th>Identificador de producto</th>
                                   <th>Nombre de producto</th>
                                   <th>Cantidad producto</th>
                                   <th>Precio Unit producto</th>
                                   <th>Disponibilidad</th>
-                                  
+                                </tr>
+                              </thead>
+                              <tr>
+                                <td>0001</td><td>Tela uno</td><td>12</td><td>80.000</td><td>Disp</td>                                
                               </tr>
-                          </table>
+                              <tr>
+                                <td>0002</td><td>Tela dos</td><td>24</td><td>120.000</td><td>Disp</td>                                
+                              </tr>
+                              <tr>
+                                <td>0003</td><td>Tela tres</td><td>36</td><td>150.000</td><td>Disp</td>                                
+                              </tr>
+                              <tr>
+                                <td>0004</td><td>Tela cuatro</td><td>15</td><td>50.000</td><td>Disp</td>                                
+                              </tr>
+
+                            
+                            </table>
+                          </div>                          
+                                          
                         </div>
+                        <br>
                         <fieldset>
                               
                             <legend>
                                 Registro de Productos
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-bag" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                                </svg>
-                            
-                            
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <hr />
+                           
                             </legend>
-                            <label for="">Identificador de producto</label>
-                            <input type="text" placeholder="Id producto"><br/>
-                            <label for="">Nombre de producto</label>
-                            <input type="text" placeholder="Nombre producto"><br />
-                            <label for="">Cantidad producto</label>
-                            <input type="text" placeholder="Cant producto"><br />
-                            <label for="">Precio unitario producto</label>
-                            <input type="text" placeholder="Prec Unit"><br />
-                            
-                            
-                            
+
+                            <div class="login-box-body-prod">
+                              <p class="login-box-msg">Registra el nuevo producto</p>
+                          
+                              <form>
+                                <div class="form-group has-feedback">
+                                  <input type="text" class="form-control" placeholder="Identificador de producto" name="idproducto">
+                                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                  <input type="text" class="form-control" placeholder="Nombre de producto" name="nameproducto">
+                                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                  <input type="text" class="form-control" placeholder="Cantidad producto" name="cantproducto">
+                                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                  <input type="text" class="form-control" placeholder="Precio unitario producto" name="precioroducto">
+                                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                </div>
+                               
+                                <div>
+                                  <label for="Estado de producto">Estado de producto</label>
+                                  <select name="estado" id="">
+                                      <option value="en proceso">Disponible</option>
+                                      <option value="cancelado">No Disponible</option>                                
+                                  </select>
+                              </div>
+                              <div class="row center">                              
+                                <button type="button" class="btn btn-primary btn-flat">Registrar</button><br />
+                              </div>
+                              </form>
+
+                            </div>
                         </fieldset>
-                        <div>
-                            <label for="Estado de producto">Estado de producto</label>
-                            <select name="estado" id="">
-                                <option value="en proceso">Disponible</option>
-                                <option value="cancelado">No Disponible</option>                                
-                            </select>
-                        </div>
-                        <div class="col-xs-4 margen">                              
-                          <button type="button" class="btn btn-primary btn-flat">Registrar</button><br />
-                        </div>
+                        
+                        
                         <div class="col-xs-4 margen">
                           <button type="button" class="btn btn-primary">Actualizar</button>
                           
