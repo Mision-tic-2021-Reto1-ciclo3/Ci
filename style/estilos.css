@@ -10,8 +10,13 @@ ul {
   height: 400px;
   width: 1400px;
 }
+.title {
+  position: absolute;
+  left: 40%;
+  text-align: center;
+}
 
-.center{
+.center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,4 +75,3 @@ ul {
 .btn-primary.hover {
   background-color: #367fa9;
 }
-
