@@ -11,10 +11,66 @@ ul {
   width: 1400px;
 }
 
-.center{
+.center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.style {
+  margin-left: 22%;
+  padding: 10px;
+}
+.margen {
+  padding: 10px;
+}
+
+.font {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+}
+
+.subtitle {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 30px;
+}
+
+.contentForm {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+}
+.buscar {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 4px;
+  border-radius: 8px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  background-color: rgb(250, 243, 250);
+  text-align: left;
+  width: 100%;
+}
+th,
+td {
+  padding: 20px;
+}
+.thead {
+  background-color: rgb(146, 180, 201);
+  border-bottom: solid 5px;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tr:hover td {
+  background-color: rgb(146, 180, 201);
+  color: white;
 }
 
 .login-box,
@@ -43,11 +99,19 @@ ul {
 }
 .login-box-body,
 .register-box-body {
-  background: #fff;
+  background: white;
   padding: 20px;
   border-top: 0;
   color: #666;
 }
+.login-box-body-prod,
+.register-box-body {
+  background: rgb(146, 180, 201);
+  padding: 20px;
+  border-top: 0;
+  color: rgb(26, 23, 23);
+}
+
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {
   color: #777;
@@ -70,4 +134,3 @@ ul {
 .btn-primary.hover {
   background-color: #367fa9;
 }
-
