@@ -39,6 +39,15 @@ ul {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
 }
+.buscar {
+  background-color: white;
+  border: 1px solid gray;
+  padding: 4px;
+  border-radius: 8px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
 
 .table {
   background-color: rgb(250, 243, 250);
