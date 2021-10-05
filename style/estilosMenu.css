@@ -6,7 +6,7 @@
   --width-collapsed: 50px;
 }
 body {
-  background-color: rgb(88, 113, 134);
+  background-color: aliceblue;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   padding: 0;
@@ -18,7 +18,7 @@ body {
 }
 #sidemenu {
   background-color: var(--bgcolor);
-  color: rgb(9, 68, 18);
+  color: aquamarine;
   position: fixed;
   height: 100%;
   left: 0;
@@ -93,7 +93,7 @@ body {
 }
 #sidemenu #menu-items .item .icon,
 #sidemenu #menu-items .item .title {
-  font-size: 16px;
+  font-size: 14px;
   vertical-align: middle;
   overflow: hidden;
   display: inline-block;
