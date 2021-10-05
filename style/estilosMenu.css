@@ -1,7 +1,7 @@
 :root {
   --width: 300px;
   --padding: 10px;
-  --bgcolor: rgb(246, 246, 246);
+  --bgcolor: rgb(204, 192, 190);
   --hovercolor: rgb(23, 23, 23);
   --width-collapsed: 50px;
 }
@@ -33,6 +33,11 @@ body {
 #sidemenu #header {
   box-sizing: border-box;
   border-bottom: solid 1px var(--hovercolor);
+}
+#sidemenu #header img {
+  width: 80%;
+  margin: auto;
+  display: block;
 }
 #sidemenu #header #title {
   box-sizing: border-box;
