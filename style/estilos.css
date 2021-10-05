@@ -17,6 +17,30 @@ ul {
   justify-content: center;
 }
 
+
+.style{
+  margin-left: 22%;
+  padding: 10px;
+}
+.margen{
+  padding: 10px;
+}
+
+.font{
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+}
+
+.subtitle{
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 30px;
+}
+
+.contentForm{
+  font-family: 'Mulish', sans-serif;
+  font-size: 18px;
+}
+
 .style {
   margin-left: 22%;
   padding: 10px;
