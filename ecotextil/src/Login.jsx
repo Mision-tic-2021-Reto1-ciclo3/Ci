@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "media/logoEcoTextil.png";
 import "styles/estilos.css";
-import "styles/estilosMenu.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Login = () => {
   return (
@@ -26,24 +27,26 @@ const Login = () => {
           <div class="form-group has-feedback">
             <input
               type="password"
+              className="form-control"
               placeholder="Contraseña"
               name="ingPassword"
             />
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <span className="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
         </div>
         <main>
           <div class="row center">
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-flat">
+              <button type="submit" className="btn btn-primary btn-flat">
                 Iniciar Sesión
               </button>
+             
             </div>
           </div>
-          <a href="menu.html">
+          <a href="Menu.jsx">
             <div class="row center">
               <div class="col-xs-4">
-                <button type="button" class="btn btn-primary btn-flat">
+                <button type="button" className="btn btn-primary btn-flat">
                   Registrar nueva cuenta
                 </button>
               </div>
