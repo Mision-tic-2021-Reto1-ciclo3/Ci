@@ -1,5 +1,6 @@
 import React from "react";
 import "styles/estilos.css";
+import tela from "media/tela4.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Productos = () => {
@@ -15,6 +16,9 @@ const Productos = () => {
         @import
         url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&family=Noto+Sans:wght@700&family=Raleway&display=swap');
       </style>
+      {
+        //<img src={tela} alt="" />
+      }
       <header class="font center ">Administrar Productos</header>
       <div className="contentSells">
         <section>
@@ -42,10 +46,10 @@ const Productos = () => {
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
                 <div className="col-xs-4 margen">
-                  <button type="button" class="btn btn-primary btn-flat">
+                  <button type="button" className=" margen btn btn-primary btn-flat  ">
                     Buscar producto
                   </button>
-                  <button type="button" class="btn btn-primary btn-flat">
+                  <button type="button" className=" margen btn btn-primary btn-flat">
                     Listar producto
                   </button>
                 </div>

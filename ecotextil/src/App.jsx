@@ -18,11 +18,11 @@ function App() {
         <Route path="/productos">
           <Productos />
         </Route>
+        <Route path="/usuarios">
+          <Usuarios />
+        </Route>
         <Route path={["/productos", "/usuarios", "/ventas"]}>
           <Menu>
-            <Route path="/usuarios">
-              <Usuarios />
-            </Route>
             <Route path="/ventas">
               <Ventas />
             </Route>
