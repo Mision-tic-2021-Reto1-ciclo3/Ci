@@ -1,7 +1,23 @@
 import React from "react";
 import "styles/estilos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//import axios from "axios";
+/*
+const actualizarUsuario = async () => {
+  //Enviar info al backend
+  const options = {
+    mehtod: "PATCH",
+    url: "http://localhost:5000/usuarios/nuevo",
+    headers: { "Content-Type": "application/json" },
+    data: { ...infoNuevoUsuario, id: usuario._id },
+  };
+};
+await axios.request(options).then(function (response) {
+  console.log(response.data);
+  toast.success("Usuario modificado con éxito");
+  setEdit(false);
+});
+*/
 const Usuarios = () => {
   return (
     <div class="style">

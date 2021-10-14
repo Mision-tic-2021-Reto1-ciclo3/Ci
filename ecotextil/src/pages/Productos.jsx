@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "styles/estilos.css";
 import tela from "media/tela4.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Productos = () => {
+  const [mostrarTabla, setMostrarTabla] = useState(true);
+  useEffect(() => {
+    console.log(setMostrarTabla);
+  }, [mostrarTabla]);
+
   return (
     <div className="style">
       <link
@@ -23,6 +28,91 @@ const Productos = () => {
       <div className="contentSells">
         <section>
           <div>
+            
+            <form className="contentForm" action="">
+              <fieldset>
+                <legend>
+                  Registro de productos
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-shopping-cart"
+                    aria-hidden="true"
+                  >
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                </legend>
+                <div className="">
+                  <h4>Registra el nuevo producto</h4>
+
+                  <form className="contentForm">
+
+                    <label>Identificador de producto
+                      <input
+                        type="text"
+                        placeholder="Identificador de producto"
+                        name="idproducto"
+                      /><br />
+                    </label><br />
+                    <label>Nombre de producto
+                      <input
+                        type="text"
+                        placeholder="Nombre de producto"
+                        name="nameproducto"
+                      />
+                    </label><br />
+                    <label>Cantidad producto
+                      <input
+                        type="text"
+                        placeholder="Cantidad producto"
+                        name="cantproducto"
+                      />
+                    </label><br />
+                    <label>Precio Unitario producto
+                      <input
+                        type="text"
+                        placeholder="Precio unitario producto"
+                        name="precioroducto"
+                      /><br />
+                    </label>
+                    <div>
+                      <label for="Estado de producto">Estado de producto
+                        <select name="estado" id="">
+                          <option value="en proceso">Disponible</option>
+                          <option value="cancelado">No Disponible</option>
+                        </select>
+
+                      </label>
+                    </div>
+                    <div class="row center">
+                      <button type="button" class="btn btn-primary btn-flat">
+                        Registrar
+                      </button>
+                      <br />
+                    </div>
+                  </form>
+                </div>
+              </fieldset>
+
+              <div className="col-xs-4 margen">
+                <button type="button" class="btn btn-primary">
+                  Actualizar
+                </button>
+
+                <button type="button" class="btn btn-primary btn-flat">
+                  Quitar
+                </button>
+              </div>
+            </form>
             <form className="contentForm" action="">
               <h1 className="subtitle">Gestión de Productos</h1>
               <h1 className="subtitle">Listado de productos</h1>
@@ -54,127 +144,8 @@ const Productos = () => {
                   </button>
                 </div>
               </legend>
-              <div id="main-container">
-                <table className="table">
-                  <thead class="thead">
-                    <tr>
-                      <th>Identificador de producto</th>
-                      <th>Nombre de producto</th>
-                      <th>Cantidad producto</th>
-                      <th>Precio Unit producto</th>
-                      <th>Disponibilidad</th>
-                    </tr>
-                  </thead>
-                  <tr>
-                    <td>0001</td>
-                    <td>Tela uno</td>
-                    <td>12</td>
-                    <td>80.000</td>
-                    <td>Disp</td>
-                  </tr>
-                  <tr>
-                    <td>0002</td>
-                    <td>Tela dos</td>
-                    <td>24</td>
-                    <td>120.000</td>
-                    <td>Disp</td>
-                  </tr>
-                  <tr>
-                    <td>0003</td>
-                    <td>Tela tres</td>
-                    <td>36</td>
-                    <td>150.000</td>
-                    <td>Disp</td>
-                  </tr>
-                </table>
-              </div>
-              <fieldset>
-                <legend>
-                  Registro de productos
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="feather feather-shopping-cart"
-                    aria-hidden="true"
-                  >
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                  </svg>
-                </legend>
-                <div className="login-box-body-prod">
-                  <p class="login-box-msg">Registra el nuevo producto</p>
-                  <form>
-                    <div class="form-group has-feedback">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Identificador de producto"
-                        name="idproducto"
-                      />
-                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Nombre de producto"
-                        name="nameproducto"
-                      />
-                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Cantidad producto"
-                        name="cantproducto"
-                      />
-                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Precio unitario producto"
-                        name="precioroducto"
-                      />
-                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
+              <TablaProductos/>
 
-                    <div>
-                      <label for="Estado de producto">Estado de producto</label>
-                      <select name="estado" id="">
-                        <option value="en proceso">Disponible</option>
-                        <option value="cancelado">No Disponible</option>
-                      </select>
-                    </div>
-                    <div class="row center">
-                      <button type="button" class="btn btn-primary btn-flat">
-                        Registrar
-                      </button>
-                      <br />
-                    </div>
-                  </form>
-                </div>
-              </fieldset>
-
-              <div className="col-xs-4 margen">
-                <button type="button" class="btn btn-primary">
-                  Actualizar
-                </button>
-
-                <button type="button" class="btn btn-primary btn-flat">
-                  Quitar
-                </button>
-              </div>
             </form>
           </div>
         </section>
@@ -182,5 +153,39 @@ const Productos = () => {
     </div>
   );
 };
+
+const FormularioRegistroProductos = ({
+
+}) => {
+  
+}
+
+//Creación de table productos como componente
+const TablaProductos = () => {
+  return (
+    <div>
+      <h2>
+        Lista de productos
+      </h2>
+      <table>
+        <thead class="thead">
+          <tr>
+            <th>Identificador de producto</th>
+            <th>Nombre de producto</th>
+            <th>Cantidad producto</th>
+            <th>Precio Unit producto</th>
+            <th>Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            //Llamada de productos desde el backend
+          }
+        </tbody>
+
+      </table>
+    </div>
+  );
+}
 
 export default Productos;
