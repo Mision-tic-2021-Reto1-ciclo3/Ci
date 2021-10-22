@@ -4,6 +4,9 @@ import tela from "media/tela4.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
 import { nanoid } from "nanoid";
+import { Tooltip, Dialog } from "@material-ui/core";
+
+
 //import { Toast } from "bootstrap";
 
 
@@ -84,18 +87,16 @@ const Productos = () => {
           listaProductos={productos}
           setProductos={setProductos} />
       )}
-      <div className="contentSells">
+      <div className="contentSells margen center">
 
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary margen" >
           Actualizar
         </button>
-        <button type="button" class="btn btn-primary btn-flat">
-          Eliminar
-        </button>
-        <button type="button" className=" margen btn btn-primary btn-flat  ">
+
+        <button type="button" class="btn btn-primary margen">
           Buscar producto
         </button>
-        <button onClick={() => setMostrarTabla(!mostrarTabla)} type="button" className=" margen btn btn-primary btn-flat">
+        <button onClick={() => setMostrarTabla(!mostrarTabla)} type="button" className="btn btn-primary btn-flat margen">
           {textoBoton}
         </button>
 
@@ -145,71 +146,91 @@ const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProdu
 
 
   return (
-    <div>
+    <div >
       <h2 className="subtitle">
         Gestión de productos
       </h2>
-      <form ref={form} onSubmit={submitForm}>
-        <legend>
-          Agregar productos
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-shopping-cart"
-            aria-hidden="true"
-          >
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-        </legend>
-        <label htmlFor="idProducto">Identificador de producto
-          <input
-            type="text"
-            placeholder="Identificador de producto"
-            name="idProducto"
-          /><br />
-        </label><br />
-        <label htmlFor="descripcion">Descripción de producto
-          <input
-            type="text"
-            placeholder="Descripción de producto"
-            name="descripcion"
-          />
-        </label><br />
-        <label htmlFor="valorUnit">Valor Unitario producto
-          <input
-            type="text"
-            placeholder="Valor unitario producto"
-            name="valorUnit"
-          />
-        </label><br />
-        <label htmlFor="estado">Estado de producto
-          <select name="estado" id="">
-            <option disabled value={0} >Seleccione una opción</option>
-            <option >Disponible</option>
-            <option >No Disponible</option>
-          </select>
-        </label><br />
-        <button type="submit" className="btn btn-primary btn-flat">
-          Registrar producto
-        </button>
-        <br />
+      <div className="center">
+        <form ref={form} onSubmit={submitForm}>
+          <legend>
+            Agregar productos
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-shopping-cart"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>rgb(130, 155, 184)
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </legend>
+          <div className="margen">
 
-      </form>
+            <label htmlFor="idProducto">Identificador de producto
+              <input
+                type="text"
+                placeholder="Identificador de producto"
+                name="idProducto"
+              /><br />
+            </label><br />
+            <label htmlFor="descripcion">Descripción de producto
+              <input
+                type="text"
+                placeholder="Descripción de producto"
+                name="descripcion"
+              />
+            </label><br />
+            <label htmlFor="valorUnit">Valor Unitario producto
+              <input
+                type="text"
+                placeholder="Valor unitario producto"
+                name="valorUnit"
+              />
+            </label><br />
+            <label htmlFor="estado">Estado de producto
+              <select name="estado" id="">
+                <option disabled value={0} >Seleccione una opción</option>
+                <option >Disponible</option>
+                <option >No Disponible</option>
+              </select>
+            </label><br />
+          </div>
+          <button type="submit" className="btn btn-primary btn-flat margen">
+            Registrar producto
+          </button>
+          <br />
+
+        </form>
+
+      </div>
     </div>
   )
 }
 
 //Creación de table productos como componente
 const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
+  const [busqueda, setBusqueda] = useState('');
+  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+
+  useEffect(() => {
+    
+    //Devuelve una lista filtrada
+    setProductosFiltrados(
+      listaProductos.filter((elemento) => {
+        
+        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaProductos]);
+
   useEffect(() => {
     console.log("Listado de productos en el componente de la tabla", listaProductos);
   }, [listaProductos]);
@@ -224,8 +245,11 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   return (
     <div>
       <h1 className="subtitle">Registro de Productos</h1>
+      <input
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)} placeholder="Buscar"
+        className="" />
       <legend>
-
         Listado de productos
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
           <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
@@ -253,7 +277,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
           {
             //Llamada de productos desde el backend
           }
-          {listaProductos.map((productos) => {
+          {productosFiltrados.map((productos) => {
             return (
               <FilaProducto key={nanoid()} productos={productos} setEjecutarConsulta={setEjecutarConsulta} />
             );
@@ -270,6 +294,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
 const FilaProducto = ({ productos, setEjecutarConsulta }) => {
   console.log("producto", productos)
   const [edit, setEdit] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
     idProducto: productos.idProducto,
     descripcion: productos.descripcion,
@@ -339,28 +364,46 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
           <td>{productos.descripcion}</td>
           <td>{productos.valorUnit}</td>
           <td>{productos.estado}</td>
-
         </>
       }
       <td>
-        <div className="mini">
-          {edit ? (<i text="Editar" className="mini" onClick={() => actualizarProducto()} class="fas fa-check"></i>
+        <div className="center">
+          {edit ? (
+            <>
+              <Tooltip title="Confirmar Edición" arrow>
+                <i text="Editar" className="mini" onClick={() => actualizarProducto()} class="fas fa-check"></i>
+              </Tooltip>
+              <Tooltip title="Cancelar Edición" arrow>
+                <i className="mini" onClick={() => setEdit(!edit)} class="fas fa-ban"></i>
+
+              </Tooltip>
+
+            </>
           ) : (
-           
-           
+            <>
+              <Tooltip title="Editar Producto" arrow>
+                <i className="mini" onClick={() => setEdit(!edit)} class="fas fa-pencil-alt"></i>
+              </Tooltip>
 
-              <i className="mini" onClick={() => setEdit(!edit)} class="fas fa-pencil-alt"></i>
-            
-              
+              <Tooltip title="Eliminar Producto" arrow>
+                <i className="mini" onClick={() => setOpenDialog(true)} class="fas fa-trash"></i>
+              </Tooltip>
 
+            </>
           )}
-          <i className="mini" onClick={() => eliminarProducto()} class="fas fa-trash"></i>
-
         </div>
+        <Dialog open={openDialog}>
+          <div className="contentForm margen">
+            <h1>¿Está seguro de eliminar el producto?</h1>
+            <div className="center margen">
+              <button onClick={() => eliminarProducto()} type="button" class="btn btn-outline-success margen" >Sí</button>
+              <button onClick={() => setOpenDialog(false)} type="button" class="btn btn-outline-danger margen">No</button>
+
+            </div>
+          </div>
+        </Dialog>
       </td>
-
     </tr>
-
   );
 }
 
