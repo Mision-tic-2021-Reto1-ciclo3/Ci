@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import "styles/estilos.css";
 import tela from "media/tela4.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from 'axios';
+import { nanoid } from "nanoid";
+//import { Toast } from "bootstrap";
+
+
 
 const productosBackend = [
   { idProducto: 1, descripcion: "tela a", valorUnit: 10000, estado: "disponible" },
@@ -16,13 +21,40 @@ const Productos = () => {
   //variable para obtener los productos
   const [productos, setProductos] = useState([]);
   const [textoBoton, setTextoBoton] = useState("Registrar producto");
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
-
-  //UseEffect para llamar datos desde el back
   useEffect(() => {
-    setProductos(productosBackend);
-  }, []);
+    const obtenerProductos = async () => {
+      const options = { method: 'GET', url: 'http://localhost:5000/productos' };
+      await axios.request(options).then(function (response) {
+        setProductos(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    };
+    if (ejecutarConsulta) {
+      obtenerProductos();
+      setEjecutarConsulta(false);
+    }
 
+  }, [ejecutarConsulta])
+
+  //método para obtener los productos de la base de datos
+  useEffect(() => {
+
+
+    //Obtener lista de productos desde el backend
+    if (mostrarTabla) {
+      setEjecutarConsulta(true);
+    }
+  }, [mostrarTabla]);
+
+  /*
+    //UseEffect para llamar datos desde el back
+    useEffect(() => {
+      setProductos(productosBackend);
+    }, []);
+  */
   //useEffect para cambiar el contenido del texto del botón
   useEffect(() => {
     if (mostrarTabla) {
@@ -46,7 +78,7 @@ const Productos = () => {
       </style>
       <header class="font center ">Administrar Productos</header>
       {mostrarTabla ? (
-        <TablaProductos listaProductos={productos} />
+        <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
       ) : (
         <FormularioRegistroProductos setMostrarTabla={setMostrarTabla}
           listaProductos={productos}
@@ -74,20 +106,44 @@ const Productos = () => {
   );
 };
 
+//formulario para registrar productos
 const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProductos }) => {
   const form = useRef(null);
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
+
+    //conexión a la base de datos
     const nuevoProducto = {};
     fd.forEach((value, key) => {
       nuevoProducto[key] = value;
     });
+
+    const options = {
+      method: 'POST', url: 'http://localhost:5000/productos/nuevo/',
+      headers: { 'Content-Type': 'application/json' },
+      data: { idProducto: nuevoProducto.idProducto, descripcion: nuevoProducto.descripcion, valorUnit: nuevoProducto.valorUnit, estado: nuevoProducto.estado },
+    };
+
+    await axios
+      .request(options).then(function (response) {
+        console.log(response.data);
+        console.log('producto agregado exitosamente');
+      }).catch(function (error) {
+        console.error(error);
+        //Aquí va un toast (una librería para mostrar mensajes emergentes toast.error('Error creando un prod))
+        console.error('Error creando un producto');
+      });
+
     setMostrarTabla(true);
-    setProductos([...listaProductos, nuevoProducto]);
+    //setProductos([...listaProductos, nuevoProducto]);
     console.log("producto agregado")
   };
+
+
+
+
   return (
     <div>
       <h2 className="subtitle">
@@ -153,10 +209,18 @@ const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProdu
 }
 
 //Creación de table productos como componente
-const TablaProductos = ({ listaProductos }) => {
+const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   useEffect(() => {
     console.log("Listado de productos en el componente de la tabla", listaProductos);
   }, [listaProductos]);
+  //const form = useRef(null);
+
+  //una manera para poder modificar los campos
+  /*const submitEdit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
+    console.log(e);
+  };*/
   return (
     <div>
       <h1 className="subtitle">Registro de Productos</h1>
@@ -169,13 +233,20 @@ const TablaProductos = ({ listaProductos }) => {
 
         <i class="bi bi-cart-fill"></i>
       </legend>
-      <table>
+      {
+        /*
+        <form ref={form} onSubmit={submitEdit}>
+        </form>
+        */
+      }
+      <table className="tabla">
         <thead>
           <tr>
             <th>Identificador de producto</th>
             <th>Descripción de producto</th>
             <th>Valor Unit producto</th>
             <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -184,19 +255,112 @@ const TablaProductos = ({ listaProductos }) => {
           }
           {listaProductos.map((productos) => {
             return (
-              <tr>
-                <td>{productos.idProducto}</td>
-                <td>{productos.descripcion}</td>
-                <td>{productos.valorUnit}</td>
-                <td>{productos.estado}</td>
-
-              </tr>
+              <FilaProducto key={nanoid()} productos={productos} setEjecutarConsulta={setEjecutarConsulta} />
             );
           })}
         </tbody>
-
       </table>
+
+
     </div>
+  );
+}
+
+//Método para actualizar las filas de la tabla por cada registro
+const FilaProducto = ({ productos, setEjecutarConsulta }) => {
+  console.log("producto", productos)
+  const [edit, setEdit] = useState(false);
+  const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+    idProducto: productos.idProducto,
+    descripcion: productos.descripcion,
+    valorUnit: productos.valorUnit,
+    estado: productos.estado,
+  })
+  const actualizarProducto = async () => {
+    console.log(infoNuevoProducto);
+    //enviar información al backend
+    const options = {
+      method: 'PATCH',
+      url: 'http://localhost:5000/productos/editar/',
+      headers: { 'Content-Type': 'application/json' },
+      data: { ...infoNuevoProducto, id: productos._id }
+    };
+
+    await axios.request(options).then(function (response) {
+      console.log(response.data);
+      //Toast.succes
+      console.log("Registro Actualizado con éxito");
+      setEdit(false);
+      setEjecutarConsulta(true);
+    }).catch(function (error) {
+      //toast.error
+      console.error(error);
+    });
+
+  };
+
+  const eliminarProducto = async () => {
+    const options = {
+      method: 'DELETE',
+      url: 'http://localhost:5000/productos/eliminar/',
+      headers: { 'Content-Type': 'application/json' },
+      data: { id: productos._id }
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        //Toast.succes
+        console.log("Producto Eliminado con éxito");
+        setEjecutarConsulta(true);
+      }).catch(function (error) {
+        //toast.error
+        console.error(error);
+        console.log("Error eliminando el producto");
+
+      });
+  };
+  return (
+    <tr >
+      {edit ?
+        <>
+          <td><input type="text" value={infoNuevoProducto.idProducto}
+            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, idProducto: e.target.value })} /></td>
+          <td><input type="text" value={infoNuevoProducto.descripcion}
+            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcion: e.target.value })} /></td>
+          <td><input type="text" value={infoNuevoProducto.valorUnit}
+            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorUnit: e.target.value })} /></td>
+          <td><input type="text" value={infoNuevoProducto.estado} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estado: e.target.value })} /></td>
+        </>
+        :
+        <>
+          <td>{productos.idProducto}</td>
+          <td>{productos.descripcion}</td>
+          <td>{productos.valorUnit}</td>
+          <td>{productos.estado}</td>
+
+        </>
+      }
+      <td>
+        <div className="mini">
+          {edit ? (<i text="Editar" className="mini" onClick={() => actualizarProducto()} class="fas fa-check"></i>
+          ) : (
+           
+           
+
+              <i className="mini" onClick={() => setEdit(!edit)} class="fas fa-pencil-alt"></i>
+            
+              
+
+          )}
+          <i className="mini" onClick={() => eliminarProducto()} class="fas fa-trash"></i>
+
+        </div>
+      </td>
+
+    </tr>
+
   );
 }
 
