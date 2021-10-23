@@ -1,22 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import "styles/estilos.css";
-import tela from "media/tela4.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
 import { nanoid } from "nanoid";
 import { Tooltip, Dialog } from "@material-ui/core";
-
-
-//import { Toast } from "bootstrap";
-
-
 
 const productosBackend = [
   { idProducto: 1, descripcion: "tela a", valorUnit: 10000, estado: "disponible" },
   { idProducto: 2, descripcion: "tela b", valorUnit: 10000, estado: "disponible" },
   { idProducto: 3, descripcion: "tela c", valorUnit: 10000, estado: "disponible" },
   { idProducto: 4, descripcion: "tela d", valorUnit: 10000, estado: "disponible" },
-
 ];
 
 const Productos = () => {
@@ -44,20 +37,12 @@ const Productos = () => {
 
   //método para obtener los productos de la base de datos
   useEffect(() => {
-
-
     //Obtener lista de productos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
   }, [mostrarTabla]);
 
-  /*
-    //UseEffect para llamar datos desde el back
-    useEffect(() => {
-      setProductos(productosBackend);
-    }, []);
-  */
   //useEffect para cambiar el contenido del texto del botón
   useEffect(() => {
     if (mostrarTabla) {
@@ -141,10 +126,6 @@ const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProdu
     //setProductos([...listaProductos, nuevoProducto]);
     console.log("producto agregado")
   };
-
-
-
-
   return (
     <div >
       <h2 className="subtitle">
@@ -284,8 +265,6 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
           })}
         </tbody>
       </table>
-
-
     </div>
   );
 }
