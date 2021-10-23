@@ -3,9 +3,10 @@ import logo from "media/logoEcoTextil.png";
 import "styles/estilos.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleLogin from 'react-google-login';
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
+  const { loginWithRedirect } = useAuth0();
   const respuestaGoogle = (respuesta) => {
     console.log(respuesta);
     console.log(respuesta.profileObj);
@@ -42,7 +43,7 @@ const Login = () => {
         <main>
           <div class="row center">
             <div class="col-xs-4">
-              <button type="submit" className="btn btn-primary btn-flat">
+              <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-primary btn-flat">
                 Iniciar Sesión
               </button>
 
