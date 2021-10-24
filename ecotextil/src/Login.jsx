@@ -2,14 +2,11 @@ import React from "react";
 import logo from "media/logoEcoTextil.png";
 import "styles/estilos.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import GoogleLogin from 'react-google-login';
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
-  const respuestaGoogle = (respuesta) => {
-    console.log(respuesta);
-    console.log(respuesta.profileObj);
-  }
+  const { loginWithRedirect } = useAuth0();
+ 
   return (
     <div className="login-box">
       <div>
@@ -42,7 +39,7 @@ const Login = () => {
         <main>
           <div class="row center">
             <div class="col-xs-4">
-              <button type="submit" className="btn btn-primary btn-flat">
+              <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-primary btn-flat">
                 Iniciar Sesión
               </button>
 
@@ -61,17 +58,6 @@ const Login = () => {
 
           <div class="row center">
             <div class="g-signin2"></div>
-          </div>
-          <div className="App">
-            <br /><br />
-            <GoogleLogin
-              clientId="860580858571-ompc5ips8jmlagnrmcm2a9j0cjfire43.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={respuestaGoogle}
-              onFailure={respuestaGoogle}
-              cookiePolicy={'single_host_origin'}
-            />,
-
           </div>
         </main>
       </div>
