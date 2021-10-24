@@ -107,7 +107,7 @@ const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProdu
     });
 
     const options = {
-      method: 'POST', url: 'http://localhost:5000/productos/nuevo/',
+      method: 'POST', url: 'http://localhost:5000/productos/',
       headers: { 'Content-Type': 'application/json' },
       data: { idProducto: nuevoProducto.idProducto, descripcion: nuevoProducto.descripcion, valorUnit: nuevoProducto.valorUnit, estado: nuevoProducto.estado },
     };
@@ -285,9 +285,9 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
     //enviar información al backend
     const options = {
       method: 'PATCH',
-      url: 'http://localhost:5000/productos/editar/',
+      url: `http://localhost:5000/productos/${productos._id}/`,
       headers: { 'Content-Type': 'application/json' },
-      data: { ...infoNuevoProducto, id: productos._id }
+      data: { ...infoNuevoProducto}
     };
 
     await axios.request(options).then(function (response) {
@@ -306,7 +306,7 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
   const eliminarProducto = async () => {
     const options = {
       method: 'DELETE',
-      url: 'http://localhost:5000/productos/eliminar/',
+      url: `http://localhost:5000/productos/${productos._id}/`,
       headers: { 'Content-Type': 'application/json' },
       data: { id: productos._id }
     };
