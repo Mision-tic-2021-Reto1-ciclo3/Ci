@@ -74,13 +74,6 @@ const Productos = () => {
       )}
       <div className="contentSells margen center">
 
-        <button type="button" class="btn btn-primary margen" >
-          Actualizar
-        </button>
-
-        <button type="button" class="btn btn-primary margen">
-          Buscar producto
-        </button>
         <button onClick={() => setMostrarTabla(!mostrarTabla)} type="button" className="btn btn-primary btn-flat margen">
           {textoBoton}
         </button>

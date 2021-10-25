@@ -39,6 +39,9 @@ const Login = () => {
         <main>
           <div class="row center">
             <div class="col-xs-4">
+              {
+                //autenticación con AUTH0, pendiente por modificar el acceso dependiendo el usuario, vendedor o admin
+              }
               <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-primary btn-flat">
                 Iniciar Sesión
               </button>
