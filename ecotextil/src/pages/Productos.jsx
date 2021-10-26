@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
 import { nanoid } from "nanoid";
 import { Tooltip, Dialog } from "@material-ui/core";
+import { ToastContainer } from 'react-toastify';
+import  { Toaster, toast } from 'react-hot-toast';
 
 const productosBackend = [
   { idProducto: 1, descripcion: "tela a", valorUnit: 10000, estado: "disponible" },
@@ -80,6 +82,13 @@ const Productos = () => {
 
       </div>
       <mostrarTabla setMostrarTabla />
+      <div><Toaster/></div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        draggable
+        pauseOnHover
+      />
 
     </div>
   );
@@ -108,9 +117,19 @@ const FormularioRegistroProductos = ({ setMostrarTabla, listaProductos, setProdu
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
+        
+        //toast.success('Producto agregado con éxito');
+        toast.success('Producto agregado con éxito', {
+          position: "bottom-center",
+          autoClose: 5000,
+        });
         console.log('producto agregado exitosamente');
       }).catch(function (error) {
         console.error(error);
+        toast.error('Error agregando un producto', {
+          position: "top-right",
+          autoClose: 5000,
+        });
         //Aquí va un toast (una librería para mostrar mensajes emergentes toast.error('Error creando un prod))
         console.error('Error creando un producto');
       });
@@ -195,11 +214,11 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
 
   useEffect(() => {
-    
+
     //Devuelve una lista filtrada
     setProductosFiltrados(
       listaProductos.filter((elemento) => {
-        
+
         return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
       })
     );
@@ -239,7 +258,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
       }
       <table className="tabla">
         <thead>
-          <tr>
+          <tr className="contentForm">
             <th>Identificador de producto</th>
             <th>Descripción de producto</th>
             <th>Valor Unit producto</th>
@@ -280,17 +299,25 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
       method: 'PATCH',
       url: `http://localhost:5000/productos/${productos._id}/`,
       headers: { 'Content-Type': 'application/json' },
-      data: { ...infoNuevoProducto}
+      data: { ...infoNuevoProducto }
     };
 
     await axios.request(options).then(function (response) {
       console.log(response.data);
       //Toast.succes
+      toast.success('Producto actualizado con éxito', {
+        position: "bottom-center",
+        autoClose: 5000,
+      });
       console.log("Registro Actualizado con éxito");
       setEdit(false);
       setEjecutarConsulta(true);
     }).catch(function (error) {
       //toast.error
+      toast.error('No se pudo actualizar el producto', {
+        position: "top-right",
+        autoClose: 5000,
+      });
       console.error(error);
     });
 
@@ -309,10 +336,18 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
       .then(function (response) {
         console.log(response.data);
         //Toast.succes
+        toast.success('Producto eliminado de manera exitosa', {
+          position: "bottom-center",
+          autoClose: 5000,
+        });
         console.log("Producto Eliminado con éxito");
         setEjecutarConsulta(true);
       }).catch(function (error) {
         //toast.error
+        toast.error('No se pudo eliminar el producto', {
+          position: "top-right",
+          autoClose: 5000,
+        });
         console.error(error);
         console.log("Error eliminando el producto");
 

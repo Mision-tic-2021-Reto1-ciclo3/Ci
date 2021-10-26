@@ -4,23 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { Tooltip, Dialog } from "@material-ui/core";
+import { ToastContainer } from "react-toastify";
+import  { Toaster, toast } from 'react-hot-toast';
 
-/*
-const actualizarUsuario = async () => {
-  //Enviar info al backend
-  const options = {
-    mehtod: "PATCH",
-    url: "http://localhost:5000/usuarios/nuevo",
-    headers: { "Content-Type": "application/json" },
-    data: { ...infoNuevoUsuario, id: usuario._id },
-  };
-};
-await axios.request(options).then(function (response) {
-  console.log(response.data);
-  toast.success("Usuario modificado con éxito");
-  setEdit(false);
-});
-*/
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(false);
   //variable para obtener los usuarios
@@ -88,9 +74,11 @@ const Usuarios = () => {
           {textoBoton}
         </button>
       </div>
+      <div><Toaster/></div>
 
       <mostrarTabla setMostrarTabla />
 
+      <ToastContainer position='bottom-center' autoClose={5000} />
 
 
     </div>
@@ -124,10 +112,18 @@ const FormularioRegistroUsuarios = ({ setMostrarTabla, listaUsuarios, setUsuario
 
     await axios.request(options).then(function (response) {
       console.log(response.data);
-      console.log('Usuario agregado con éxito');
+      toast.success('Usuario validado con éxito', {
+        position: "bottom-center",
+        autoClose: 5000,
+      });
+        console.log('Usuario agregado con éxito');
     }).catch(function (error) {
       console.error(error);
-      //Aquí va un toast (una librería para mostrar mensajes emergentes toast.error('Error creando un prod))
+      toast.error('No se pudo validar el usuario', {
+        position: "top-right",
+        autoClose: 5000,
+      });
+      //Aquí va un toast (una librería para mostrar mensajes emergentes toast.error('Error creando un usuario))
       console.error('Error creando un usuario');
     });
 
@@ -220,11 +216,10 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
         Estado del Usuario
         <i class="fas fa-users-cog"></i>
         <hr />
-
       </legend>
       <table className="tabla">
         <thead>
-          <tr>
+          <tr className="contentForm">
             <th>Nombres</th>
             <th>Correo </th>
             <th>Rol </th>
@@ -240,10 +235,7 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
               );
             })}
         </tbody>
-
       </table>
-
-
     </div>
   )
 }
@@ -271,11 +263,19 @@ const FilaUsuario = ({ usuarios, setEjecutarConsulta }) => {
     await axios.request(options).then(function (response) {
       console.log(response.data);
       //Toast.succes
-      console.log("Usuario validado con éxito");
+      toast.success('Usuario validado con éxito', {
+        position: "bottom-center",
+        autoClose: 5000,
+      });
+      console.log("Usuario actualizado con éxito");
       setEdit(false);
       setEjecutarConsulta(true);
     }).catch(function (error) {
       //toast.error
+      toast.error('Error actualizando el usuario', {
+        position: "top-right",
+        autoClose: 5000,
+      });
       console.error(error);
     });
   };
@@ -293,10 +293,18 @@ const FilaUsuario = ({ usuarios, setEjecutarConsulta }) => {
       .then(function (response) {
         console.log(response.data);
         //Toast.succes
+        toast.success('Usuario eliminado de manera exitosa', {
+          position: "bottom-center",
+          autoClose: 5000,
+        });
         console.log("Usuario eliminado con éxito");
         setEjecutarConsulta(true);
       }).catch(function (error) {
         //toast.error
+        toast.error('No se pudo eliminar el usuario', {
+          position: "top-right",
+          autoClose: 5000,
+        });
         console.error(error);
         console.log("Error eliminando el usuario");
 
@@ -316,7 +324,7 @@ const FilaUsuario = ({ usuarios, setEjecutarConsulta }) => {
           <td>
             <select name="rol" id="" value={infoNuevoUsuario.rol}
               onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, rol: e.target.value })}>
-              <option disabled value={0} >Seleccione una opción</option>
+              <option value={0} >Seleccione una opción</option>
               <option >Administrador</option>
               <option >Vendedor</option>
             </select>
