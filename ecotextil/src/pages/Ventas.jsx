@@ -7,6 +7,7 @@ import { Tooltip, Dialog } from "@material-ui/core";
 import { ToastContainer } from "react-toastify";
 import { Toaster, toast } from 'react-hot-toast';
 
+
 const Ventas = () => {
     const [mostrarTabla, setMostrarTabla] = useState(false);
     //variable para obtener las ventas
@@ -87,6 +88,43 @@ const Ventas = () => {
 //Formulario para registrar ventas
 const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
     const form = useRef(null);
+    const [productos, setProductos] = useState([]);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+    const [usuarios, setUsuarios] = useState([]);
+
+    //Obtener los productos de la DB
+    useEffect(() => {
+        const obtenerProductos = async () => {
+            const options = { method: 'GET', url: 'http://localhost:5000/productos' };
+            await axios.request(options).then(function (response) {
+                setProductos(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        };
+        if (ejecutarConsulta) {
+            obtenerProductos();
+            setEjecutarConsulta(false);
+        }
+
+    }, [ejecutarConsulta])
+
+    //obtener los usuarios de la DB
+    useEffect(() => {
+        const obtenerUsuarios = async () => {
+            const options = { method: 'GET', url: 'http://localhost:5000/usuarios' };
+            await axios.request(options).then(function (response) {
+                setUsuarios(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+        if (ejecutarConsulta) {
+            obtenerUsuarios();
+            setEjecutarConsulta(false);
+        };
+
+    }, [ejecutarConsulta])
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -97,12 +135,19 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
         fd.forEach((value, key) => {
             nuevaVenta[key] = value;
         });
+        console.log(nuevaVenta);
 
-        const options = {
+        const infoCompleta = {
+            descripcion: productos.filter((pr) => pr._id === nuevaVenta.descripcion[0]),
+            vendedor: usuarios.filter((pr) => pr._id === nuevaVenta.vendedor[0]),
+        }
+        console.log(infoCompleta);
+
+        /*const options = {
             method: 'POST', url: 'http://localhost:5000/ventas/',
             headers: { 'Content-Type': 'application/json' },
-            data: {
-                idVenta: nuevaVenta.idVenta,
+            data: { nuevaVenta
+               /* idVenta: nuevaVenta.idVenta,
                 idProducto: nuevaVenta.idProducto,
                 cantProd: nuevaVenta.cantProd,
                 valorUnit: nuevaVenta.valorUnit,
@@ -111,9 +156,9 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
                 fechaVenta: nuevaVenta.fechaVenta,
                 vendedor: nuevaVenta.vendedor,
                 estadoVenta: nuevaVenta.estadoVenta,
-                valTotalVenta: nuevaVenta.valTotalVenta
-                //nombres: nuevoUsuario.nombres
-            },
+                valTotalVenta: nuevaVenta.valTotalVenta*/
+        //nombres: nuevoUsuario.nombres
+        /*    },
         };
 
         await axios.request(options).then(function (response) {
@@ -134,7 +179,25 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
 
         setMostrarTabla(true);
         console.log('Venta creada');
+        */
     };
+
+    //useEffect para obtener los productos y usuarios de la DB en ventas
+    /*useEffect(() => {
+        obtenerProductos(setProductos);
+        obtenerUsuarios(setUsuarios);
+    }, []);*/
+
+    //useEffect para verificar si estan funcionando
+    useEffect(() => {
+        console.log(productos);
+    }, [productos]);
+
+    useEffect(() => {
+        console.log(usuarios);
+    }, [usuarios]);
+
+
 
     return (
         <div>
@@ -149,17 +212,32 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
                         <label htmlFor="idVenta">Identificador de venta
                             <input type="text" placeholder="Id venta" name="idVenta" />
                         </label><br />
-                        <label htmlFor="idProducto">Identificador de producto
-                            <input type="text" placeholder="Id producto" name="idProducto" />
+
+
+                        <label>Identificador de producto
+                            <select name="descripcion" id="">
+                                {productos.map((p) => {
+                                    return (<option key={nanoid()} /*value={p._id}*/ >{p.descripcion}</option>)
+                                })}
+                            </select>
+
                         </label>
                         <label htmlFor="cantProd">Cantidad producto
-                            <input type="text" placeholder="Cant producto" name="cantProd" />
+                            <input type="number" placeholder="Cant producto" id="cantProd" name="cantProd" />
 
                         </label><br />
+
+
                         <label htmlFor="valorUnit">Precio unitario producto
-                            <input type="text" placeholder="Prec Unit" name="valorUnit" />
+                            <select type="" name="valorUnit" id="valorUnit">
+                                {productos.map((p) => {
+                                    return (<option key={nanoid()}>{p.valorUnit}</option>)
+                                })}
+                            </select>
+
 
                         </label><br />
+
                         <label htmlFor="idCliente">Identificador de cliente
                             <input type="text" placeholder="Id cliente" name="idCliente" />
 
@@ -171,8 +249,12 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
                         <label htmlFor="fechaVenta">Fecha de venta
                             <input type="date" placeholder="" name="fechaVenta" />
                         </label><br />
-                        <label htmlFor="vendedor">Nombre de vendedor
-                            <input type="text" placeholder="Nombre vendedor" name="vendedor" />
+                        <label>Nombre de vendedor
+                            <select name="vendedor" id="vendedor" type="text">
+                                {usuarios.map((u) => {
+                                    return (<option key={nanoid()} /*value={u._id}*/>{u.nombres}</option>)
+                                })}
+                            </select>
                         </label><br />
                         <label htmlFor="estadoVenta">Estado de venta
                             <select name="estadoVenta" id="">
@@ -182,7 +264,9 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
                             </select>
                         </label><br />
                         <label htmlFor="valTotalVenta">Valor total venta
-                            <input type="text" placeholder="Valor total" name="valTotalVenta" />
+                            {Op}
+                            <input onClick={Op} onChange={Op} type="number" placeholder="Valor total" name="valTotalVenta" />
+
                         </label><br />
                     </div>
                     <button type="submit" className="btn btn-primary btn-flat margen">
@@ -195,8 +279,16 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
     );
 
 
+}
+const Op = () => {
+    const cantProd = document.getElementById("cantProd")?.value;
+    const valorUnit = document.getElementById("valorUnit")?.value;
+    const op = cantProd * valorUnit;
 
+    console.log(op);
 
+    return Op
+    /*<input type="text" value={Op} onChange={Op}/>*/;
 }
 
 const TablaVentas = ({ listaVentas, setEjecutarConsulta }) => {
@@ -265,6 +357,9 @@ const FilaVenta = ({ ventas, setEjecutarConsulta }) => {
     console.log('Venta', ventas);
     const [edit, setEdit] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
+    const [usuarios, setUsuarios] = useState([]);
+    const [productos, setProductos] = useState([]);
+    const [ejecutarConsulta] = useState(true);
     //método para cargar la información de una venta
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
         idVenta: ventas.idVenta,
@@ -278,6 +373,49 @@ const FilaVenta = ({ ventas, setEjecutarConsulta }) => {
         valTotalVenta: ventas.valTotalVenta,
         estadoVenta: ventas.estadoVenta,
     })
+
+    //obtener los usuarios de la DB
+    useEffect(() => {
+        const obtenerUsuarios = async () => {
+            const options = { method: 'GET', url: 'http://localhost:5000/usuarios' };
+            await axios.request(options).then(function (response) {
+                setUsuarios(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+        if (ejecutarConsulta) {
+            obtenerUsuarios();
+            setEjecutarConsulta(false);
+        };
+
+    }, [ejecutarConsulta])
+
+    useEffect(() => {
+        console.log(usuarios);
+    }, [usuarios]);
+
+    useEffect(() => {
+        const obtenerProductos = async () => {
+            const options = { method: 'GET', url: 'http://localhost:5000/productos' };
+            await axios.request(options).then(function (response) {
+                setProductos(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        };
+        if (ejecutarConsulta) {
+            obtenerProductos();
+            setEjecutarConsulta(false);
+        }
+
+    }, [ejecutarConsulta])
+
+    useEffect(() => {
+        console.log(productos);
+    }, [productos]);
+
+
     //método para actualizar ventas
     const actualizarVenta = async () => {
         console.log(infoNuevaVenta);
@@ -346,13 +484,23 @@ const FilaVenta = ({ ventas, setEjecutarConsulta }) => {
                         <input type="text" value={infoNuevaVenta.idVenta} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idVenta: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.idProducto} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idProducto: e.target.value })} />
+
+                        <select name="descripcion" id="" value={infoNuevaVenta.idProducto} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idProducto: e.target.value })}>
+                            {productos.map((p) => {
+                                return (<option key={nanoid()} /*value={p._id}*/ >{p.descripcion}</option>)
+                            })}
+                        </select>
+
                     </td>
                     <td>
                         <input type="text" value={infoNuevaVenta.cantProd} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, cantProd: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.valorUnit} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, valorUnit: e.target.value })} />
+                        <select type="" name="valorUnit" id="valorUnit" value={infoNuevaVenta.valorUnit} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, valorUnit: e.target.value })}>
+                            {productos.map((p) => {
+                                return (<option key={nanoid()}>{p.valorUnit}</option>)
+                            })}
+                        </select>
                     </td>
                     <td>
                         <input type="text" value={infoNuevaVenta.idCliente} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idCliente: e.target.value })} />
@@ -364,7 +512,12 @@ const FilaVenta = ({ ventas, setEjecutarConsulta }) => {
                         <input type="date" value={infoNuevaVenta.fechaVenta} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, fechaVenta: e.target.value })} />
                     </td>
                     <td>
-                        <input type="text" value={infoNuevaVenta.vendedor} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, vendedor: e.target.value })} />
+                        <select name="vendedor" id="vendedor" type="text" value={infoNuevaVenta.vendedor} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, vendedor: e.target.value })}>
+                            {usuarios.map((u) => {
+                                return (<option key={nanoid()} /*value={u._id}*/>{u.nombres}</option>)
+                            })}
+                        </select>
+
                     </td>
                     <td>
                         <select name="estadoVenta" id="" value={infoNuevaVenta.estadoVenta} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estadoVenta: e.target.value })}>

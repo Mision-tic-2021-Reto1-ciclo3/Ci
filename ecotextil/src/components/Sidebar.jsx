@@ -1,7 +1,5 @@
 import React from "react";
-import logo from "media/logoEcoTextil.png";
 import user from "media/usuario.svg";
-import tela from "media/tela4.jpg";
 import log from "media/LOGO ECO TEXTIL.png";
 import "styles/estilos.css";
 import 'bootstrap/dist/css/bootstrap.min.css';

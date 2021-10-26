@@ -7,13 +7,6 @@ import { Tooltip, Dialog } from "@material-ui/core";
 import { ToastContainer } from 'react-toastify';
 import  { Toaster, toast } from 'react-hot-toast';
 
-const productosBackend = [
-  { idProducto: 1, descripcion: "tela a", valorUnit: 10000, estado: "disponible" },
-  { idProducto: 2, descripcion: "tela b", valorUnit: 10000, estado: "disponible" },
-  { idProducto: 3, descripcion: "tela c", valorUnit: 10000, estado: "disponible" },
-  { idProducto: 4, descripcion: "tela d", valorUnit: 10000, estado: "disponible" },
-];
-
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(false);
   //variable para obtener los productos
