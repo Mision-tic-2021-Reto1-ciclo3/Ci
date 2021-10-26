@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soluciones Web Ecotextil</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style/estilos.css" />
+  <link rel="shortcut icon" href="./media/logoEcoTextil.png" type="image/x-icon" />
+  <title>Soluciones Web Ecotextil</title>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id"
+    content="860580858571-ompc5ips8jmlagnrmcm2a9j0cjfire43.apps.googleusercontent.com">
+
 </head>
+
 <body>
+
+
+  <div id="back"> </div>
+
+  <div class="login-box">
+
+    <div class="login-logo">
+      <img src="./media/logoEcoTextil.png" class="img-responsive" style="padding: 30px 100px 0px 40px">
+    </div>
+
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Ingresa al sistema</p>
+
+      <form>
+
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" placeholder="Usuario" name="ingUsuario">
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="Contraseña" name="ingPassword">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+
     <header>
     </header>
     <main>
 
-    </main>
-    <footer>
 
-    </footer>
-    
+        <div class="row center">
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-flat">Iniciar Sesión</button>
+          </div>
+        </div>
+
+          <a href="menu.html">
+            <div class="row center">
+              <div class="col-xs-4">
+                <button type="button" class="btn btn-primary btn-flat">Iniciar Sesión</button>
+              </div>
+            </div>
+          </a>
+          <br>
+         
+
+        <div class="row center">
+          <div class="g-signin2">
+            <data-onsuccess="onSignIn">
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
 </body>
+
 </html>
