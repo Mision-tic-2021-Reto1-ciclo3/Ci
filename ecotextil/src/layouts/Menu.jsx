@@ -4,9 +4,9 @@ import React from 'react'
 
 const Menu = () => {
     return (
-        <div className="sidenav">
-            aca debería ir un sidebar
-            esta es una prueba
+        <div className="">
+            
+            <title>Soluciones Web Ecotextil</title>
         </div>
     )
 }

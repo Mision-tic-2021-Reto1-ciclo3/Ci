@@ -7,6 +7,7 @@ import Productos from "pages/Productos";
 import Usuarios from "pages/Usuarios";
 import Ventas from "pages/Ventas";
 import Menu from "layouts/Menu";
+import Sidebar from "components/Sidebar"
 import { Auth0Provider } from "@auth0/auth0-react";
 
 
@@ -15,11 +16,14 @@ function App() {
     <Auth0Provider
     domain="ecotextil.us.auth0.com"
     clientId="Mttt25nRKflRKEGPIWNomCEFp8r1sS8e"
-    redirectUri={window.location.origin}
+    redirectUri={"http://localhost:3000/productos"}
     >
     <Router>
       <Switch>
         
+        <Route path="/Sidebar">
+          <Sidebar />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>

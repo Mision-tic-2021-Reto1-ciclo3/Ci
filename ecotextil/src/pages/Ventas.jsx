@@ -6,9 +6,11 @@ import { nanoid } from "nanoid";
 import { Tooltip, Dialog } from "@material-ui/core";
 import { ToastContainer } from "react-toastify";
 import { Toaster, toast } from 'react-hot-toast';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Ventas = () => {
+    const { logout }  = useAuth0();
     const [mostrarTabla, setMostrarTabla] = useState(false);
     //variable para obtener las ventas
     const [ventas, setVentas] = useState([]);
@@ -72,7 +74,7 @@ const Ventas = () => {
             }
 
             <div className="contentSells margen center">
-                <button onClick={() => setMostrarTabla(!mostrarTabla)} type="button" className="btn btn-primary btn-flat margen">
+                <button onClick={() => setMostrarTabla(!mostrarTabla)} type="button" className="btn btn-success btn-flat margen">
                     {textoBoton}
                 </button>
             </div>
@@ -81,6 +83,8 @@ const Ventas = () => {
             <mostrarTabla setMostrarTabla />
 
             <ToastContainer position='bottom-center' autoClose={5000} />
+
+            <button type="button" className="btn btn-danger btn-flat" onClick={() => logout({ returnTo: "http://localhost:3000/login" })}>Cerrar sesión</button>
         </div>
     )
 }
@@ -269,7 +273,7 @@ const FormularioRegistroVentas = ({ setMostrarTabla, listaVentas, setVentas }) =
 
                         </label><br />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-flat margen">
+                    <button type="submit" className="btn btn-outline-success btn-flat margen">
                         Registrar venta
                     </button>
                 </form>

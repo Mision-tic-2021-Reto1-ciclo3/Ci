@@ -3,6 +3,8 @@ import logo from "media/logoEcoTextil.png";
 import "styles/estilos.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth0 } from "@auth0/auth0-react";
+import {Link } from "react-router-dom";
+
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
@@ -37,26 +39,29 @@ const Login = () => {
           </div>
         </div>
         <main>
-          <div class="row center">
+          <div className="center">
             <div class="col-xs-4">
               {
                 //autenticación con AUTH0, pendiente por modificar el acceso dependiendo el usuario, vendedor o admin
               }
-              <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-primary btn-flat">
-                Iniciar Sesión
+              <button onClick={() => loginWithRedirect()} type="submit" className="btn btn-success btn-flat">
+                Iniciar Sesión    
+                <i class="fab fa-google google"></i>
               </button>
 
             </div>
           </div>
-          <a href="Menu.jsx">
-            <div class="row center">
-              <div class="col-xs-4">
-                <button type="button" className="btn btn-primary btn-flat">
+          
+            <div class="center margen">
+              <Link to="/Ventas">
+                <button type="button" className="btn btn-success btn-flat">
                   Registrar nueva cuenta
                 </button>
+
+              </Link>
+            
               </div>
-            </div>
-          </a>
+          
           <br />
 
           <div class="row center">
