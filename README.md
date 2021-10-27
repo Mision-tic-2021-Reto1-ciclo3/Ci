@@ -1,3 +1,3 @@
 # Ci
-proyecto
-Proyecto funcional en la rama migracion en la carpeta ecotextil
+
+Proyecto REACTJS funcional en la rama migracion en la carpeta que contiene el proyecto "ecotextil".
